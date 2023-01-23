@@ -1,0 +1,21 @@
+service: scrapper-lambda
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+plugins:
+  - serverless-offline
+  
+package:
+  exclude:
+    - node_modules/puppeteer/.local-chromium/**
+
+functions:
+  hello:
+    handler: handler.hello
+    memorySize: 1536
+    timeout: 30
+    events:
+      - http:
+          path: /url
+          method: post
